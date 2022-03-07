@@ -11,6 +11,9 @@ class Card{
     y=0;
     w=73;
     h=96;
+    if(this.num==1){
+      this.num=14;
+    }
   }
   public void setxy(float x,float y){
     this.x=x;

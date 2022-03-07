@@ -24,4 +24,15 @@ class Gametable{
     table[2]=c3;
     c3.setxy(x+146,y);
   }
+  public void place1(Card c4){
+    table[3]=c4;
+    c4.setxy(x+36,y+96);
+  }
+  public void place11(Card c5){
+    table[4]=c5;
+    c5.setxy(x+109,y+96);
+  }
+  public Card[] getCards(){
+    return(table);
+  }
 }

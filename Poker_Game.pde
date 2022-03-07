@@ -1,4 +1,4 @@
-enum Gamestates{
+ enum Gamestates{
   PASSCARD,
   THREECARD,
   FOURTHCARD,
@@ -36,6 +36,7 @@ void setup(){
   player=new Hand(427,700);
 }
 void draw(){
+  background(255);
   switch(currentstate){
     case PASSCARD:
     turnnumber=0;
@@ -49,13 +50,35 @@ void draw(){
       g.place3(d.passcard(),d.passcard(),d.passcard());
       currentstate=Gamestates.BET;
     break;
+    case FOURTHCARD:
+    turnnumber=2;
+      g.place1(d.passcard());
+      currentstate=Gamestates.BET;
+    break;
+    case FIFTHCARD:
+    turnnumber=3;
+      g.place11(d.passcard());
+      currentstate=Gamestates.BET;
+    break;
     case BET:
       if(spacekey==true && turnnumber==0){
         currentstate=Gamestates.THREECARD;
       }
       if(spacekey==true && turnnumber==1){
-        currentstate=Gamestates.THREECARD;
+        currentstate=Gamestates.FOURTHCARD;
       }
+      if(spacekey==true && turnnumber==2){
+        currentstate=Gamestates.FIFTHCARD;
+      }
+      if(spacekey==true && turnnumber==3){
+        player.combineC(g.table);
+        player.calcScore();
+        currentstate=Gamestates.CHECKWINNER;
+      }
+    break;
+    case CHECKWINNER:
+    turnnumber=4;
+      
     break;
   }
   player.showHand();
@@ -67,4 +90,3 @@ void keyPressed(){
     spacekey=true;
   }
 }
-//Homework: write a shuffle function in deck that will randomize the positions of the card objects in the array.

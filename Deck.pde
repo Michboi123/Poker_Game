@@ -5,13 +5,13 @@ class Deck{
     cl=new Card[52];
     int c=0;
     for(int f=0;f<13;f++){
-      cl[c]=new Card(f+2,"Diamonds",cardsprites[c]);
+      cl[c]=new Card(f+1,"Diamonds",cardsprites[c]);
       c+=1;
-      cl[c]=new Card(f+2,"Clubs",cardsprites[c]);
+      cl[c]=new Card(f+1,"Clubs",cardsprites[c]);
       c+=1;
-      cl[c]=new Card(f+2,"Hearts",cardsprites[c]);
+      cl[c]=new Card(f+1,"Hearts",cardsprites[c]);
       c+=1;
-      cl[c]=new Card(f+2,"Spades",cardsprites[c]);
+      cl[c]=new Card(f+1,"Spades",cardsprites[c]);
       c+=1;
     }
   }
