@@ -92,7 +92,7 @@ class Hand{
   public int triples(){
     int highest=0;
     for(int y=0;y<5;y++){
-      if(combine[y].num==combine[y+1].num && combine[y]==combine[y+2]){
+      if(combine[y].num==combine[y+1].num && combine[y].num==combine[y+2].num){
         highest=combine[y].num;
         return(combine[y].num+300);
       }
@@ -104,7 +104,7 @@ class Hand{
     boolean three=false;
     boolean two=false;
     for(int y=0;y<5;y++){
-      if(combine[y].num==combine[y+1].num && combine[y]==combine[y+2]){
+      if(combine[y].num==combine[y+1].num && combine[y].num==combine[y+2].num){
         highest=combine[y].num;
         three=true;
       }
@@ -122,7 +122,7 @@ class Hand{
   public int quads(){
     int highest=0;
     for(int y=0;y<4;y++){
-      if(combine[y].num==combine[y+1].num && combine[y]==combine[y+2] && combine[y]==combine[y+3]){
+      if(combine[y].num==combine[y+1].num && combine[y].num==combine[y+2].num && combine[y].num==combine[y+3].num){
         highest=combine[y].num;
         return(combine[y].num+700);
       }
@@ -184,32 +184,38 @@ class Hand{
   public void calcScore(){
     if(straitflush()!=0){
       score=straitflush();
+      print("got a straitflush");
     }
     else if(quads()!=0){
       score=quads();
+      print("got a quad");
     }
     else if(fullHouse()!=0){
       score=fullHouse();
+      print("got a fullhouse");
     }
     else if(flush()!=0){
       score=flush();
+      print("got a flush");
     }
     else if(strait()!=0){
       score=strait();
+      print("got a strait");
     }
     else if(triples()!=0){
       score=triples();
+      print("got a triple");
     }
     else if(doubles2()!=0){
-      score=doubles();
+      score=doubles2();
+      print("got a 2double");
     }
     else if(doubles()!=0){
       score=doubles();
+      print("got a double");
     }
     else{
       score=highcard();
     }
   }
 }
-//Homework: Write the function that will check for FullHouse
-//also check for FourOfAKind
