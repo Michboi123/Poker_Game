@@ -50,10 +50,18 @@ class Button{
       text(label,x+textOffset,y+30);
   }
   public boolean mouseover(){
-    if((mouseX>= x-20 && mouseX<=x+20) && (mouseY>=y-20 && mouseY<=y+20)) {
+    if((mouseX>= x && mouseX<=x+w) && (mouseY>=y && mouseY<=y+h)) {
       print("true");
       return(true);
     } 
+    else{
+      return(false);
+    }
+  }
+  public boolean mouseClick(){
+    if(justClicked==true && mouseover()==true){
+      return(true);
+    }
     else{
       return(false);
     }

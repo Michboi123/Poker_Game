@@ -2,11 +2,12 @@ class Hand{
   Card card1,card2;
   Card[] combine;
   float x,y;
-  int score;
+  int score,money;
   public Hand(float x,float y){
     this.x=x;
     this.y=y;
     score=0;
+    money=1000;
   }
   public void setCards(Card card1,Card card2){
     this.card1=card1;
@@ -19,6 +20,12 @@ class Hand{
     this.card2.show();
     fill(0);
     text(score,x,y-10);
+    fill(0);
+    text(money,x+100,y-10);
+  }
+  public int giveMoney(int m){
+    money=money-m;
+    return(m);
   }
   public void combineC(Card[] cs){
     combine=new Card[7];

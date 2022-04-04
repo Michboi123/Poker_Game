@@ -10,7 +10,7 @@
 Gamestates currentstate=Gamestates.PASSCARD;
 Gametable g;
 int turnnumber=0;
-boolean spacekey=false;
+boolean spacekey=false, justClicked=false;
 PImage[] cardsprites=new PImage[52];
 Deck d;
 Hand player;
@@ -18,7 +18,7 @@ Hand player2;
 Hand player3;
 Hand player4;
 Input in;
-Button b;
+Button b,b2;
 void setup(){
   size(1000,800);
   PImage diamonds=loadImage("diamonds-cards.jpg");
@@ -45,6 +45,7 @@ void setup(){
   player4=new Hand(700,400);
   in=new Input(600,700);
   b=new Button(720,700,"Bet");
+  b2=new Button(820,700,"Check");
 }
 void draw(){
   background(255);
@@ -81,16 +82,20 @@ void draw(){
       currentstate=Gamestates.BET;
     break;
     case BET:
-      if(spacekey==true && turnnumber==0){
+      if(b.mouseClick()==true){
+        g.changeBet(in.getNum());
+      }
+      
+      if(b2.mouseClick()==true && turnnumber==0){
         currentstate=Gamestates.THREECARD;
       }
-      if(spacekey==true && turnnumber==1){
+      if(b2.mouseClick()==true && turnnumber==1){
         currentstate=Gamestates.FOURTHCARD;
       }
-      if(spacekey==true && turnnumber==2){
+      if(b2.mouseClick()==true && turnnumber==2){
         currentstate=Gamestates.FIFTHCARD;
       }
-      if(spacekey==true && turnnumber==3){
+      if(b2.mouseClick()==true && turnnumber==3){
         player.combineC(g.table);
         player.calcScore();
         player2.combineC(g.table);
@@ -117,8 +122,12 @@ void draw(){
   b.setButtonColor(100);
   b.roundButton(20);
   b.show();
-  b.mouseover();
+  b2.setTextOffset(32);
+  b2.setButtonColor(100);
+  b2.roundButton(20);
+  b2.show();
   spacekey=false;
+  justClicked=false;
 }
 void keyPressed(){
   if(keyCode==32){
@@ -130,6 +139,9 @@ void keyPressed(){
   if(keyCode==8){
     in.deleteChar();
   }
+}
+void mouseClicked(){
+  justClicked=true;
 }
 //write a show function that will show the rectangular button and the label on top of the button
 //write another function called mouseover that will return a Boolean indicating whether or not your mouse is over the rectangular button

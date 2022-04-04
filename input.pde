@@ -33,4 +33,7 @@ class Input{
   public int getNum(){
     return(int(input));
   }
+  public void resIn(){
+    input="";
+  }
 }
