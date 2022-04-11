@@ -3,6 +3,7 @@ class Hand{
   Card[] combine;
   float x,y;
   int score,money;
+  PImage back=loadImage("blueback.jpg");
   public Hand(float x,float y){
     this.x=x;
     this.y=y;
@@ -23,9 +24,20 @@ class Hand{
     fill(0);
     text(money,x+100,y-10);
   }
+  public void hideHand(){
+    image(back,x,y);
+    image(back,x+73,y);
+    
+  }
   public int giveMoney(int m){
     money=money-m;
     return(m);
+  }
+  public int getScore(){
+    return(score);
+  }
+  public void addMoney(int mon){
+    money+=mon;
   }
   public void combineC(Card[] cs){
     combine=new Card[7];

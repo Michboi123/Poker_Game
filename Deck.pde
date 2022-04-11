@@ -33,6 +33,7 @@ class Deck{
       cl[i]=cl[num];
       cl[num]=temp; 
     }
+    topcard=0;
   }
   public Card passcard(){
     topcard++;

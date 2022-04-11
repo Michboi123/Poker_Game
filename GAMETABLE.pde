@@ -14,9 +14,10 @@ class Gametable{
       if(table[t]!=null){
         table[t].show();
         fill(0);
-        text(currentB,x+50,y-10);
       }
     }
+    text(currentB,x+100,y-10);
+    text(pot,x+20,y-10);
   }
   public void reseT(){
     table=new Card[5];
@@ -55,11 +56,3 @@ class Gametable{
     return(pot);
   }
 }
-
-//1) In the showTable function, also draw the currentBet on the screen.
-//2) create a money variable in the hand class
-//3) in the constructor set the money variable to be 1000
-//4) in the showHands function draw out the money variable on the screen
-//5) write a function called giveMoney with a number parameter.
-//-subtract from how much money the hand has based on the money parameter
-//-also return the money parameter

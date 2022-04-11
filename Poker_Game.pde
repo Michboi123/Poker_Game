@@ -65,6 +65,7 @@ void draw(){
       Card c8=d.passcard();
       player4.setCards(c7,c8);
       currentstate=Gamestates.BET;
+      d.shuffe();
     break;
     case THREECARD:
     turnnumber=1;
@@ -86,30 +87,48 @@ void draw(){
         g.changeBet(in.getNum());
       }
       
-      if(b2.mouseClick()==true && turnnumber==0){
-        currentstate=Gamestates.THREECARD;
-      }
-      if(b2.mouseClick()==true && turnnumber==1){
-        currentstate=Gamestates.FOURTHCARD;
-      }
-      if(b2.mouseClick()==true && turnnumber==2){
-        currentstate=Gamestates.FIFTHCARD;
-      }
-      if(b2.mouseClick()==true && turnnumber==3){
-        player.combineC(g.table);
-        player.calcScore();
-        player2.combineC(g.table);
-        player2.calcScore();
-        player3.combineC(g.table);
-        player3.calcScore();
-        player4.combineC(g.table);
-        player4.calcScore();
-        currentstate=Gamestates.CHECKWINNER;
+      if(b2.mouseClick()==true){
+        collectMoney();
+        if(turnnumber==0){
+          currentstate=Gamestates.THREECARD;
+        }
+        if(turnnumber==1){
+          currentstate=Gamestates.FOURTHCARD;
+        }
+        if(turnnumber==2){
+          currentstate=Gamestates.FIFTHCARD;
+        }
+        if(turnnumber==3){
+          player.combineC(g.table);
+          player.calcScore();
+          player2.combineC(g.table);
+          player2.calcScore();
+          player3.combineC(g.table);
+          player3.calcScore();
+          player4.combineC(g.table);
+          player4.calcScore();
+          currentstate=Gamestates.CHECKWINNER;
+          if(player.getScore()>player2.getScore() && player.getScore()>player3.getScore() && player.getScore()>player4.getScore()){
+            player.addMoney(g.getPot());
+          }
+          if(player2.getScore()>player.getScore() && player2.getScore()>player3.getScore() && player2.getScore()>player4.getScore()){
+            player2.addMoney(g.getPot());
+          }
+          if(player3.getScore()>player2.getScore() && player3.getScore()>player.getScore() && player3.getScore()>player4.getScore()){
+            player3.addMoney(g.getPot());
+          }
+          if(player4.getScore()>player2.getScore() && player4.getScore()>player3.getScore() && player4.getScore()>player.getScore()){
+            player4.addMoney(g.getPot());
+          }
+        }
       }
     break;
     case CHECKWINNER:
     turnnumber=4;
-      
+      if(b2.mouseClick()==true){
+        g.reseT();
+        currentstate=Gamestates.PASSCARD;
+      }
     break;
   }
   player.showHand();
@@ -128,6 +147,17 @@ void draw(){
   b2.show();
   spacekey=false;
   justClicked=false;
+  player2.hideHand();
+  player3.hideHand();
+  player4.hideHand();
+}
+void collectMoney(){
+  int bet=g.getCurrentBet();
+  g.addPot(player.giveMoney(bet));
+  g.addPot(player2.giveMoney(bet));
+  g.addPot(player3.giveMoney(bet));
+  g.addPot(player4.giveMoney(bet));
+  g.changeBet(0);
 }
 void keyPressed(){
   if(keyCode==32){
